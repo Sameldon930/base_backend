@@ -24,7 +24,7 @@ class HomeController extends BaseController
     {
         $menu = new Admin();
         return view(
-            'admin.index',
+            'home.index',
             ['menus' => $menu->menus(), 'mid' => $menu->getMenuId(), 'parent_id' => $menu->getParentMenuId()]
         );
     }
@@ -49,7 +49,7 @@ class HomeController extends BaseController
      */
     public function welcome()
     {
-        return view('admin.welcome', ['sysinfo' => $this->getSysInfo()]);
+        return view('home.welcome', ['sysinfo' => $this->getSysInfo()]);
     }
 
     /**

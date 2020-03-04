@@ -29,6 +29,7 @@ class DataService
         $kind = explode('-', $kind);
         //获取数组的第一个key 对应的是那个数据表
         switch ($kind[0]) {
+            //关于菜单模块
             case 'menus':
                 //获取数组的第二个key 对表进行不一样的操作
                 switch ($kind[1]) {
@@ -63,20 +64,21 @@ class DataService
                         }
                         return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
-
+                    //删除
                     case 'delete':
                         $model->id = $inputs['id'];
                         $model->exists = true;
                         if ($model->delete()) {
-                            return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                            return ['status' => ReturnCode::SUCCESS, 'msg' => trans('fzs.common.success')];
                         } else {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('fzs.common.fail')];
                         }
                         break;
                     default:
                         return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
                 }
                 break;
+            //关于管理员模块
             case 'users':
                 switch ($kind[1]) {
                     case 'add_or_update':

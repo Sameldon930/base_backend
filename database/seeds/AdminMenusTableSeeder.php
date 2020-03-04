@@ -12,8 +12,8 @@ class AdminMenusTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('admin_menus')->delete();
-        \DB::table('admin_menus')->insert(array (
+        \DB::table('z_menus')->delete();
+        \DB::table('z_menus')->insert(array (
             0 => 
                 array (
                     'id'            => 1,
@@ -21,7 +21,7 @@ class AdminMenusTableSeeder extends Seeder
                     'order'         => 4,
                     'title'         => '权限设置',
                     'icon'          => '&#xe614;',
-                    'uri'           => 'url:/qx',
+                    'uri'           => '/permission',
                     'routes'        => 'url:',
                     'created_at'    => date('Y-m-d H:i:s',time()),
                     'updated_at'    => date('Y-m-d H:i:s',time()),
@@ -31,10 +31,10 @@ class AdminMenusTableSeeder extends Seeder
                     'id'            => 2,
                     'parent_id'     => 1,
                     'order'         => 5,
-                    'title'         => '用户管理',
+                    'title'         => '管理员管理',
                     'icon'          => '&#xe612;',
                     'uri'           => '/users',
-                    'routes'        => 'url:/users',
+                    'routes'        => 'url:/admins',
                     'created_at'    => date('Y-m-d H:i:s',time()),
                     'updated_at'    => date('Y-m-d H:i:s',time()),
                 ),

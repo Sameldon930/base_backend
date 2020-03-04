@@ -26,9 +26,9 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::post('/sort',                'HomeController@changeSort');
     Route::resource('/menus',           'MenuController');
     Route::resource('/logs',            'LogController');
-    Route::resource('/users',           'UserController');
-    Route::get('/userinfo',             'UserController@userInfo');
-    Route::post('/saveinfo/{type}',     'UserController@saveInfo');
+    Route::resource('/admins',           'AdminController');
+    Route::get('/userinfo',             'AdminController@userInfo');
+    Route::post('/saveinfo/{type}',     'AdminController@saveInfo');
     Route::resource('/roles',           'RoleController');
     Route::resource('/permissions',     'PermissionController');
 });

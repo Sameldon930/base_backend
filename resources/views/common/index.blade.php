@@ -16,12 +16,12 @@
     <div class="main-layout-side">
         <div class="m-logo">
         </div>
-        @include("admin.menu")
+        @include("home.menu")
     </div>
     <!--右侧内容-->
     <div class="main-layout-container">
         <!--头部-->
-        @include("admin.header")
+        @include("home.header")
         <!--主体内容-->
         <div class="main-layout-body">
             <!--tab 切换-->

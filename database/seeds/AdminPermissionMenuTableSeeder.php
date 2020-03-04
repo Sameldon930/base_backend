@@ -12,8 +12,8 @@ class AdminPermissionMenuTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('admin_permission_menu')->delete();
-        \DB::table('admin_permission_menu')->insert(array(
+        \DB::table('z_permission_menu')->delete();
+        \DB::table('z_permission_menu')->insert(array(
             0 =>
                 array(
                     'permission_id' => 1,

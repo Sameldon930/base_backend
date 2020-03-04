@@ -12,25 +12,25 @@ class AdminPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('admin_permissions')->delete();
-        \DB::table('admin_permissions')->insert(array(
+        \DB::table('z_permissions')->delete();
+        \DB::table('z_permissions')->insert(array(
             0 =>
                 array(
                     'id'                => 1,
                     'name'              => 'userlist',
-                    'display_name'      => '用户管理查看',
-                    'description'       => '用户管理查看',
-                    'controllers'       => 'UserController@get',
+                    'display_name'      => '管理员管理查看',
+                    'description'       => '管理员管理查看',
+                    'controllers'       => 'AdminController@get',
                     'created_at'        => date('Y-m-d H:i:s',time()),
                     'updated_at'        => date('Y-m-d H:i:s',time()),
                 ),
             1 =>
                 array(
                     'id'                => 2,
-                    'name'              => 'userhandle',
-                    'display_name'      => '用户管理编辑',
-                    'description'       => '用户管理编辑',
-                    'controllers'       => 'UserController@post',
+                    'name'              => 'adminhandle',
+                    'display_name'      => '管理员管理编辑',
+                    'description'       => '管理员管理编辑',
+                    'controllers'       => 'AdminController@post',
                     'created_at'        => date('Y-m-d H:i:s',time()),
                     'updated_at'        => date('Y-m-d H:i:s',time()),
                 ),

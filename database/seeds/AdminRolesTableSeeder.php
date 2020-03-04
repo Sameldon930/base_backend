@@ -12,8 +12,8 @@ class AdminRolesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('admin_roles')->delete();
-        \DB::table('admin_roles')->insert(array(
+        \DB::table('z_roles')->delete();
+        \DB::table('z_roles')->insert(array(
             0 =>
                 array(
                     'id'                => 1,
