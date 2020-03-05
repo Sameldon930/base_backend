@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\ReturnCode;
 use App\Models\Admin;
+use App\Models\Common;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $menu = new Admin();
+        $menu = new Common();
         return view(
             'home.index',
             ['menus' => $menu->menus(), 'mid' => $menu->getMenuId(), 'parent_id' => $menu->getParentMenuId()]

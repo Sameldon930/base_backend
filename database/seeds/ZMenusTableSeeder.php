@@ -2,7 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminMenusTableSeeder extends Seeder
+/**
+ * 菜单表数据填充
+ * Class AdminMenusTableSeeder
+ */
+class ZMenusTableSeeder extends Seeder
 {
 
     /**
@@ -19,7 +23,7 @@ class AdminMenusTableSeeder extends Seeder
                     'id'            => 1,
                     'parent_id'     => 0,
                     'order'         => 4,
-                    'title'         => '权限设置',
+                    'title'         => '系统设置',
                     'icon'          => '&#xe614;',
                     'uri'           => '/permission',
                     'routes'        => 'url:',
@@ -33,7 +37,7 @@ class AdminMenusTableSeeder extends Seeder
                     'order'         => 5,
                     'title'         => '管理员管理',
                     'icon'          => '&#xe612;',
-                    'uri'           => '/users',
+                    'uri'           => '/admins',
                     'routes'        => 'url:/admins',
                     'created_at'    => date('Y-m-d H:i:s',time()),
                     'updated_at'    => date('Y-m-d H:i:s',time()),

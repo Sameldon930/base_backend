@@ -65,7 +65,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
                     type:'post',
                     dataType:'json',
                     success:function(res){
-                        if(res.status == 1){
+                        if(res.status == 0){
                             that.parent().parent().parent().remove();
                             $("[parentid='"+that.attr('data-id')+"']").remove();
                             layer.msg(res.msg,{icon:6});

@@ -39,7 +39,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">URL：</label>
         <div class="layui-input-block">
-            <input type="text" value="{{$menu['uri'] or ''}}" name="uri" required lay-verify="uri" placeholder="请输入URL,样式如:/fzs" autocomplete="off" class="layui-input">
+            <input type="text" value="{{$menu['uri'] or ''}}" name="uri" required lay-verify="uri" placeholder="请输入URL,样式如:/zzs" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -118,7 +118,7 @@
                     type:'post',
                     dataType:'json',
                     success:function(res){
-                        if(res.status == 1){
+                        if(res.status == 0){
                             layer.msg(res.msg,{icon:6});
                             var index = parent.layer.getFrameIndex(window.name);
                             setTimeout('parent.layer.close('+index+')',2000);

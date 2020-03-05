@@ -2,9 +2,7 @@
 /**
  * 语言包
  *
- * @author      fzs
- * @Time: 2017/07/14 15:57
- * @version     1.0 版本号
+ * @author      zzs
  */
 return [
     'common' => [
@@ -27,7 +25,7 @@ return [
         'del_menu'             =>    '删除菜单',
         'handle_menu'          =>    '操作菜单',
     ],
-    'users' => [
+    'admins' => [
         'notdel'               =>    '该用户不可以删除',
         'notedit'              =>    '该用户不可以编辑',
         'del_user'             =>    '删除用户',

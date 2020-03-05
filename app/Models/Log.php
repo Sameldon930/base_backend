@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model
 {
-    protected $table = 'admin_logs';
+    protected $table = 'z_logs';
     public function user()
     {
         return $this->hasOne(config('auth.providers.users.model'), 'id', 'admin_id');
     }
     public static function addLogs($content,$url,$id = ''){
         if(!$id){
-            $admin = new Admin();
+            $admin = new Common();
             $id = $admin->userId();
-            $userName = $admin->userId();
+            $userName = $admin->userName();
         }
         $data = [
             'admin_id'=>$id,
@@ -27,4 +27,12 @@ class Log extends Model
         ];
         Log::insert($data);
     }
+
+    const FIELD_LIST = [
+        'id',
+        'user_name',
+        'log_info',
+        'log_url',
+        'log_time'
+    ];
 }

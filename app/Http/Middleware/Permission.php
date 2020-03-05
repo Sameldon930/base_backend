@@ -2,12 +2,11 @@
 /**
  * rbac管理
  *
- * @author      fzs
- * @Time: 2017/07/14 15:57
- * @version     1.0 版本号
+ * @author      zzs
  */
 namespace App\Http\Middleware;
 
+use App\Models\Common;
 use App\Utils\UrlUtils;
 use Closure, Log;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +21,7 @@ class Permission
      */
     public function handle($request, Closure $next)
     {
-        $admin = new Admin();
+        $admin = new Common();
         $restfulParams = UrlUtils::toRestfulParams();
         $url = $restfulParams[UrlUtils::URL];
         $controller = $restfulParams[UrlUtils::CONTROLLER];
@@ -75,9 +74,9 @@ class Permission
         if (!empty($auth)) {
             if (!$admin->can($auth)) {
                 if ($request->ajax()) {
-                    return new JsonResponse(['msg'=>trans('fzs.common.no_permission'),'status'=>0], 200);
+                    return new JsonResponse(['msg'=>trans('zzs.common.no_permission'),'status'=>0], 200);
                 } else {
-                    exit(trans('fzs.common.no_permission'));
+                    exit(trans('zzs.common.no_permission'));
                 }
             }
         }

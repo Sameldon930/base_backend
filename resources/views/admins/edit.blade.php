@@ -3,7 +3,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户名：</label>
         <div class="layui-input-block">
-            <input type="text" value="{{$info['username'] or ''}}" name="user_name" required lay-verify="user_name" placeholder="用户名必须2到12位字母" autocomplete="off" class="layui-input">
+            <input type="text" value="{{$info['user_name'] or ''}}" name="user_name" required lay-verify="user_name" placeholder="用户名必须2到12位字母" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -86,12 +86,12 @@
             });
             form.on('submit(formDemo)', function(data) {
                 $.ajax({
-                    url:"{{url('/users')}}",
+                    url:"{{url('/admins')}}",
                     data:$('form').serialize(),
                     type:'post',
                     dataType:'json',
                     success:function(res){
-                        if(res.status == 1){
+                        if(res.status == 0){
                             layer.msg(res.msg,{icon:6});
                             var index = parent.layer.getFrameIndex(window.name);
                             setTimeout('parent.layer.close('+index+')',2000);

@@ -1,10 +1,7 @@
 <?php
 /**
- * 对于后台提交的数据进行验证类
- *
- * @author      fzs
- * @Time: 2017/07/14 15:57
- * @version     1.0 版本号
+ * 表单验证类
+ * @author      zzs
  */
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,24 +18,23 @@ class StoreRequest extends FormRequest
         switch (request()->getPathInfo()) {
             case '/menus':
                 $rules['category'] = 'required';
-                if($mid = request()->input('id'))$rules['name'] = 'required|alpha|between:2,12|unique:admin_menus,title,'.$mid;
-                else $rules['name'] = 'required|alpha|between:2,12|unique:admin_menus,title';
+                if($mid = request()->input('id'))$rules['name'] = 'required|alpha|between:2,12|unique:z_menus,title,'.$mid;
+                else $rules['name'] = 'required|alpha|between:2,12|unique:z_menus,title';
                 $rules['order']  = 'required|numeric';
                 $rules['icon']  = 'required';
                 $rules['uri']  = 'required|max:12';
                 $rules['roles']  = 'required';
                 break;
-            case '/users':
-
-                if($uid = request()->input('id')){
-                    $rules['user_name'] = 'required|alpha|between:2,12|unique:admin_users,username,'.$uid;
+            case '/admins'://管理员管理相关操作
+                if($uid = request()->input('id')){//如果是有提交id那就表示 这个是更新操作
+                    $rules['user_name'] = 'required|alpha|between:2,12|unique:z_admins,user_name,'.$uid;
                     $rules['pwd']  = 'nullable|alpha_num|between:6,12|confirmed';
-                    $rules['email']  = 'required|email|unique:admin_users,email,'.$uid;
+                    $rules['email']  = 'required|email|unique:z_admins,email,'.$uid;
 
-                }else{
-                    $rules['user_name'] = 'required|alpha|between:2,12|unique:admin_users,username';
+                }else{//否则就是新增操作
+                    $rules['user_name'] = 'required|alpha|between:2,12|unique:z_admins,user_name';
                     $rules['pwd']  = 'required|alpha_num|between:6,12|confirmed';
-                    $rules['email']  = 'required|email|unique:admin_users,email';
+                    $rules['email']  = 'required|email|unique:z_admins,email';
                     $rules['pwd_confirmation']  = 'required';
                 }
                 $rules['tel']  = 'required|numeric';
@@ -46,27 +42,26 @@ class StoreRequest extends FormRequest
 
                 $rules['user_role']  = 'required|numeric';
                 break;
-
-            case '/roles':
-
+            case '/roles'://角色管理相关操作
+                //如果有id 那就是 更新角色操作
                 if($rid = request()->input('id')){
-                    $rules['role_remark'] = 'required|between:2,12|alpha|unique:admin_roles,name,'.$rid;
-                    $rules['role_name']  = 'required|between:2,12|unique:admin_roles,display_name,'.$rid;
-                }else{
-                    $rules['role_remark'] = 'required|between:2,12|alpha|unique:admin_roles,name';
-                    $rules['role_name']  = 'required|between:2,12|unique:admin_roles,display_name';
+                    $rules['role_remark'] = 'required|between:2,12|unique:z_roles,name,'.$rid;
+                    $rules['role_name']  = 'required|between:2,12|unique:z_roles,display_name,'.$rid;
+                }else{//否则就是新增角色
+                    $rules['role_remark'] = 'required|between:2,12|unique:z_roles,name';
+                    $rules['role_name']  = 'required|between:2,12|unique:z_roles,display_name';
                 }
                 $rules['role_desc'] = 'required|between:2,30';
                 $rules['permission_list'] = 'array';
                 break;
             case '/permissions':
                 if($rid = request()->input('id')){
-                    $rules['permission_name'] = 'required|between:2,12|unique:admin_permissions,name,'.$rid;
-                    $rules['permission_control'] = 'required|between:2,50|unique:admin_permissions,controllers,'.$rid;
+                    $rules['permission_name'] = 'required|between:2,12|unique:z_permissions,name,'.$rid;
+                    $rules['permission_control'] = 'required|between:2,50|unique:z_permissions,controllers,'.$rid;
 
                 }else{
-                    $rules['permission_name']  = 'required|between:2,12|unique:admin_permissions,display_name';
-                    $rules['permission_control'] = 'required|between:2,50|unique:admin_permissions,controllers';
+                    $rules['permission_name']  = 'required|between:2,12|unique:z_permissions,display_name';
+                    $rules['permission_control'] = 'required|between:2,50|unique:z_permissions,controllers';
 
                 }
                 $rules['permission_desc'] = 'required|between:2,30';
@@ -74,7 +69,7 @@ class StoreRequest extends FormRequest
                 $rules['permission_roles'] = 'required|array';
                 break;
             case '/saveinfo/1':
-                $rules['useremail']  = 'required|email|unique:admin_users,email,'.request()->input('id');
+                $rules['useremail']  = 'required|email|unique:z_admins,email,'.request()->input('id');
                 $rules['usertel']  = 'required|numeric';
                 $rules['usersex']  = 'required|numeric';
                 break;

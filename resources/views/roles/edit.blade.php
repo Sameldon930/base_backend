@@ -55,10 +55,6 @@
 
             form.render();
             var layer = layui.layer;
-            form.verify({
-                role_desc: [/[a-zA-Z]{2,12}$/, '角色描述必须2到12位字母'],
-                role_remark: [/[a-zA-Z]{2,12}$/, '角色标识必须2到12位字母'],
-            });
             form.on('submit(formDemo)', function(data) {
                 var chk_value =[];
                 $('input[name="permission_list[]"]:checked').each(function(){
@@ -74,7 +70,7 @@
                     type:'post',
                     dataType:'json',
                     success:function(res){
-                        if(res.status == 1){
+                        if(res.status == 0){
                             layer.msg(res.msg,{icon:6});
                             var index = parent.layer.getFrameIndex(window.name);
                             setTimeout('parent.layer.close('+index+')',2000);

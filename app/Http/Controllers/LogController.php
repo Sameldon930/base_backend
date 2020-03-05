@@ -7,6 +7,9 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * 操作日志管理
+ */
 use App\Models\Log;
 use Illuminate\Http\Request;
 
@@ -25,15 +28,17 @@ class LogController extends Controller
      */
     public function show(Request $request)
     {
-        $sql = Log::with('user');
-        if (true == $request->has('title') && true == $request->has('status')) {
-            $sql->where('admin_logs.' . $request->input('status'), 'LIKE', '%' . trim($request->input('title')) . '%');
+        $sql = Log::query();
+        $where = [];
+        if (!empty($request->input('title')) && !empty($request->input('status'))) {
+            $where[] = [$request->input('status'),'=',trim($request->input('title'))];
         }
-        if (true == $request->has('begin')) {
-            $sql->where('admin_logs.log_time', '>=', trim($request->input('begin')));
+        if (true == $request->input('begin')) {
+            $where[] = ['log_time','>=',trim($request->input('begin'))];
         }
-        $sql->select('admin_logs.*');
-        $pager = $sql->orderBy('admin_logs.id', 'desc')->paginate()->appends($request->all());
+        $sql->where($where);
+        $sql->get(Log::FIELD_LIST);
+        $pager = $sql->orderBy('id', 'desc')->paginate()->appends($request->all());
         return view('logs.list', ['pager' => $pager, 'input' => $request->all()]);
     }
 }

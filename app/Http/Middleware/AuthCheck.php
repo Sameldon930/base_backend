@@ -2,9 +2,7 @@
 /**
  * 权限检查
  *
- * @author      fzs
- * @Time: 2017/07/14 15:57
- * @version     1.0 版本号
+ * @author      zzs
  */
 namespace App\Http\Middleware;
 use Illuminate\Http\JsonResponse;
@@ -46,7 +44,7 @@ class AuthCheck
         }
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return new JsonResponse(['msg'=>trans('fzs.common.no_permission'),'status'=>0], 200);
+                return new JsonResponse(['msg'=>trans('zzs.common.no_permission'),'status'=>0], 200);
             } else {
                 return redirect()->guest('/login');
             }

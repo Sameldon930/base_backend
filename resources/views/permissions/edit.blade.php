@@ -74,7 +74,7 @@
                     type:'post',
                     dataType:'json',
                     success:function(res){
-                        if(res.status == 1){
+                        if(res.status == 0){
                             layer.msg(res.msg,{icon:6});
                             var index = parent.layer.getFrameIndex(window.name);
                             setTimeout('parent.layer.close('+index+')',2000);

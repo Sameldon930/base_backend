@@ -3,13 +3,13 @@
 namespace App\Models;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Interfaces\AdminMenuInterface;
-use App\Models\Traits\AdminMenuTrait;
-class Menu extends Model implements AdminMenuInterface
+use App\Models\Interfaces\MenuInterface;
+use App\Models\Traits\MenuTrait;
+class Menu extends Model implements MenuInterface
 {
-    use AdminMenuTrait;
+    use MenuTrait;
 
-    protected $table = 'admin_menus';
+    protected $table = 'z_menus';
 
     protected $primaryKey = 'id';
 

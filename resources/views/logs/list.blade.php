@@ -9,7 +9,7 @@
     <div class="layui-inline">
         <select name="status" lay-filter="status" lay-verify="status">
             <option value="">请选择一个内容</option>
-            <option value="admin_id" {{isset($input['status'])&&$input['status']=='admin_id'?'selected':''}}>用户ID</option>
+            <option value="user_name" {{isset($input['status'])&&$input['status']=='user_name'?'selected':''}}>用户名</option>
             <option value="log_url" {{isset($input['status'])&&$input['status']=='log_url'?'selected':''}}>URL</option>
             <option value="log_ip" {{isset($input['status'])&&$input['status']=='log_ip'?'selected':''}}>IP</option>
         </select>
@@ -85,12 +85,6 @@
                                 break;
                             case 'log_ip':
                                 if((/^\/(.*)/).test(value))return '请输入正确格式的IP';
-                                break;
-                            case 'admin_id':
-                                if(!(/^[0-9]$/).test(value))return '请输入正确格式的用户ID';
-                                break;
-                            default:
-                                return '输入参数错误';
                                 break;
 
                         }

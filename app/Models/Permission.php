@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Interfaces\AdminPermissionInterface;
-use App\Models\Traits\AdminPermissionTrait;
-class Permission extends Model implements AdminPermissionInterface
+use App\Models\Interfaces\PermissionInterface;
+use App\Models\Traits\PermissionTrait;
+class Permission extends Model implements PermissionInterface
 {
-    use AdminPermissionTrait;
-    protected $table = 'admin_permissions';
+    use PermissionTrait;
+    protected $table = 'z_permissions';
     public function roleToIds()
     {
         $roles =$this->roles;

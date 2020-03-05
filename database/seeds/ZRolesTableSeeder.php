@@ -2,7 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminRolesTableSeeder extends Seeder
+/**
+ * 角色表数据填充
+ * Class AdminRolesTableSeeder
+ */
+class ZRolesTableSeeder extends Seeder
 {
 
     /**

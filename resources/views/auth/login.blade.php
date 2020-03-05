@@ -46,7 +46,7 @@
                 </div>
             </form>
         </div>
-        <p class="copyright">Copyright 2017-{{date("Y",time())}} by FZS</p>
+        <p class="copyright">Copyright {{date("Y",time())}} by zzs</p>
     </div>
 </div>
 <script src="/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>

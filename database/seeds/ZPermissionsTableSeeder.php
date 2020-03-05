@@ -2,7 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminPermissionsTableSeeder extends Seeder
+/**
+ * 权限表数据填充
+ * Class AdminPermissionsTableSeeder
+ */
+class ZPermissionsTableSeeder extends Seeder
 {
 
     /**

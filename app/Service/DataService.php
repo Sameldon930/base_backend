@@ -69,20 +69,20 @@ class DataService
                         $model->id = $inputs['id'];
                         $model->exists = true;
                         if ($model->delete()) {
-                            return ['status' => ReturnCode::SUCCESS, 'msg' => trans('fzs.common.success')];
+                            return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         } else {
-                            return ['status' => ReturnCode::FAIL, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
                         break;
                     default:
-                        return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
+                        return ['status' => ReturnCode::ERROR, 'msg' => trans('zzs.common.wrong')];
                 }
                 break;
             //关于管理员模块
-            case 'users':
+            case 'admins':
                 switch ($kind[1]) {
                     case 'add_or_update':
-                        $model->username = $inputs['user_name'];
+                        $model->user_name = $inputs['user_name'];
                         $model->email = $inputs['email'];
                         $model->mobile = $inputs['tel'];
                         $model->sex = $inputs['sex'];
@@ -90,37 +90,37 @@ class DataService
                             $model->password = bcrypt($inputs['pwd']);
                         }
                         if ($inputs['id']) {
-//                            if(is_config_id($inputs['id'], "admin.user_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('fzs.users.notedit')];
+//                            if(is_config_id($inputs['id'], "admin.user_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('zzs.users.notedit')];
                             $model->exists = true;
                             $model->id = $inputs['id'];
                         }
                         try {
                             if (!$model->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                             $model->saveRoles($inputs['user_role']);
                         } catch (\Exception $e) {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
-                        return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                        return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
                     case 'update_pwd':
                         $userinfo = new Admin();
                         $userinfo = $userinfo->user();
                         if (!App::make('hash')->check($inputs['oldpwd'], $userinfo['password'])) {
-                            return ['status' => 0, 'msg' => trans('fzs.users.pwd_false')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.admins.pwd_false')];
                         }
                         $model->password = bcrypt($inputs['pwd']);
                         $model->exists = true;
                         $model->id = $inputs['id'];
                         try {
                             if (!$model->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                         } catch (\Exception $e) {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
-                        return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                        return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
                     case 'update_info':
                         $model->email = $inputs['useremail'];
@@ -130,26 +130,27 @@ class DataService
                         $model->id = $inputs['id'];
                         try {
                             if (!$model->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                         } catch (\Exception $e) {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
-                        return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                        return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
                     case 'delete':
                         $model->id = $inputs['id'];
                         $model->exists = true;
                         if ($model->delete()) {
-                            return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                            return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         } else {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
                         break;
                     default:
-                        return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
+                        return ['status' => ReturnCode::ERROR, 'msg' => trans('zzs.common.wrong')];
                 }
                 break;
+            //关于角色管理模块
             case 'roles':
                 switch ($kind[1]) {
                     case 'add_or_update':
@@ -157,42 +158,43 @@ class DataService
                         $model->display_name = $inputs['role_name'];
                         $model->description = $inputs['role_desc'];
                         if ($inputs['id']) {
-//                            if(is_config_id($inputs['id'], "admin.role_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('fzs.roles.notedit')];
+//                            if(is_config_id($inputs['id'], "admin.role_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('zzs.roles.notedit')];
                             $model->exists = true;
                             $model->id = $inputs['id'];
                         }
                         try {
                             if (!$model->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                             $role = new Role();
                             $role = $role->find($model->id);
                             $role->savePermissions(isset($inputs['permission_list']) ? $inputs['permission_list'] : '');
                             if (!$role->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                         } catch (\Exception $e) {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
-                        return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                        return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
-
                     case 'delete':
+                        //判断当前角色和管理员已经产生了配对  如果存在 先修改 这个管理员所对应的角色
                         if ($model->isAbleDel($inputs['id'])) {
-                            return ['status' => 0, 'msg' => trans('fzs.roles.have_user')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.roles.have_user')];
                         }
                         $model->id = $inputs['id'];
                         $model->exists = true;
                         if ($model->delete()) {
-                            return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                            return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         } else {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
                         break;
                     default:
-                        return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
+                        return ['status' => ReturnCode::ERROR, 'msg' => trans('zzs.common.wrong')];
                 }
                 break;
+            //关于权限管理模块
             case 'permissions':
                 switch ($kind[1]) {
                     case 'add_or_update':
@@ -201,13 +203,13 @@ class DataService
                         $model->description = $inputs['permission_desc'];
                         $model->controllers = $inputs['permission_control'];
                         if ($inputs['id']) {
-//                            if (is_config_id($inputs['id'], "admin.permission_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('fzs.menus.notedit')];
+//                            if (is_config_id($inputs['id'], "admin.permission_table_cannot_manage_ids", false))return ['status'=>0,'msg'=>trans('zzs.menus.notedit')];
                             $model->exists = true;
                             $model->id = $inputs['id'];
                         }
                         try {
                             if (!$model->save()) {
-                                return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                                return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                             }
                             $roles = $inputs['permission_roles'];
                             if (!empty($roles)) {
@@ -219,26 +221,26 @@ class DataService
                             }
                             $model->saveRoles($roles);
                         } catch (\Exception $e) {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
-                        return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                        return ['status' => ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         break;
 
                     case 'delete':
                         $model->id = $inputs['id'];
                         $model->exists = true;
                         if ($model->delete()) {
-                            return ['status' => 1, 'msg' => trans('fzs.common.success')];
+                            return ['status' =>ReturnCode::SUCCESS, 'msg' => trans('zzs.common.success')];
                         } else {
-                            return ['status' => 0, 'msg' => trans('fzs.common.fail')];
+                            return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.common.fail')];
                         }
                         break;
                     default:
-                        return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
+                        return ['status' => ReturnCode::ERROR, 'msg' => trans('zzs.common.wrong')];
                 }
                 break;
             default:
-                return ['status' => 0, 'msg' => trans('fzs.common.wrong')];
+                return ['status' => ReturnCode::ERROR, 'msg' => trans('zzs.common.wrong')];
         }
     }
 

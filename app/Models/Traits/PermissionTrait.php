@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Facades\Config;
 
-trait AdminPermissionTrait
+trait PermissionTrait
 {
 
     /**

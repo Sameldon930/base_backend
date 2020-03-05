@@ -1,76 +1,18 @@
 <?php
 
 namespace App\Models;
-use Auth;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Model;
-class Admin extends Model
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Models\Interfaces\AdminsInterface;
+use App\Models\Traits\AdminsTrait;
+class Admin extends Model implements AuthenticatableContract, CanResetPasswordContract, AdminsInterface
 {
-
-    protected $parentMenuId = 0;
-    protected $MenuId = 0;
-
-    public function can($permission)
-    {
-        return static::user()->can($permission);
-    }
-
-    public function user()
-    {
-        return Auth::user();
-    }
-
-    public function userId()
-    {
-        return Auth::user()['id'];
-    }
-    public function userName()
-    {
-        return Auth::user()['user_name'];
-    }
-    public function userCid()
-    {
-        return Auth::user()['cid'];
-    }
-
-    public function menus()
-    {
-        $user = $this->user();
-        return Menu::getUserMenu($user);
-    }
-
-    public function allMenus()
-    {
-        return Menu::all();
-    }
-
-    public function permissions()
-    {
-        return Permission::controllerPermissions();
-    }
-
-    public function hasRole($roles)
-    {
-        return $this->user()->hasRole($roles);
-    }
-
-    public function guest() {
-        return Auth::guest();
-    }
-
-    public function setMenuId ($pmid, $mid)
-    {
-        $this->parentMenuId = $pmid;
-        $this->MenuId = $mid;
-    }
-
-    public function getParentMenuId()
-    {
-        return $this->parentMenuId;
-    }
-
-    public function getMenuId()
-    {
-        return $this->MenuId;
-    }
+    use Authenticatable, CanResetPassword, AdminsTrait;
+    protected $table = 'z_admins';
+    protected $fillable = ['user_name', 'email', 'mobile', 'password'];
+    protected $hidden = ['password', 'remember_token'];
+    protected $userInfo;
 }
-

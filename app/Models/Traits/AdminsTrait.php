@@ -5,7 +5,7 @@ namespace App\Models\Traits;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
-trait AdminUsersTrait
+trait AdminsTrait
 {
     public function cachedRoles()
     {

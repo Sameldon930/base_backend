@@ -2,9 +2,7 @@
 /**
  * 角色管理
  *
- * @author      fzs
- * @Time: 2017/07/14 15:57
- * @version     1.0 版本号
+ * @author      zzs
  */
 namespace App\Http\Controllers;
 use App\Enums\ReturnCode;
@@ -19,7 +17,7 @@ class RoleController extends BaseController
      * 角色列表
      */
     public function index(){
-        return view('roles.list',['list'=>Role::get()->toArray()]);
+        return view('roles.list',['list'=>Role::latest()->get()->toArray()]);
     }
     /**
      * 角色编辑
@@ -40,8 +38,8 @@ class RoleController extends BaseController
     public function store(StoreRequest $request){
         $model = new Role();
         $role = DataService::handleDate($model,$request->all(),'roles-add_or_update');
-        if($role['status']==1)Log::addLogs(trans('fzs.roles.handle_role').trans('fzs.common.success'),'/roles/story');
-        else Log::addLogs(trans('fzs.roles.handle_role').trans('fzs.common.fail'),'/roles/destroy');
+        if($role['status']==1)Log::addLogs(trans('zzs.roles.handle_role').trans('zzs.common.success'),'/roles/story');
+        else Log::addLogs(trans('zzs.roles.handle_role').trans('zzs.common.fail'),'/roles/destroy');
         return $role;
     }
     /**
@@ -49,11 +47,11 @@ class RoleController extends BaseController
      */
     public function destroy($id)
     {
-        if (is_config_id($id, "admin.role_table_cannot_manage_ids", false))return $this->resultJson('fzs.roles.notdel', ReturnCode::Error);
+        if (is_config_id($id, "admin.role_table_cannot_manage_ids", false))return $this->resultJson('zzs.roles.notdel', ReturnCode::Error);
         $model = new Role();
         $role = DataService::handleDate($model,['id'=>$id],'roles-delete');
-        if($role['status']==1)Log::addLogs(trans('fzs.roles.del_role').trans('fzs.common.success'),'/roles/destroy/'.$id);
-        else Log::addLogs(trans('fzs.roles.del_role').trans('fzs.menus.fail'),'/roles/destroy/'.$id);
+        if($role['status']==1)Log::addLogs(trans('zzs.roles.del_role').trans('zzs.common.success'),'/roles/destroy/'.$id);
+        else Log::addLogs(trans('zzs.roles.del_role').trans('zzs.menus.fail'),'/roles/destroy/'.$id);
         return $role;
     }
 }

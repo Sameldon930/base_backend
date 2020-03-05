@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Interfaces;
 
-interface AdminUsersInterface
+interface AdminsInterface
 {
     /**
      * 与角色的多对多关系

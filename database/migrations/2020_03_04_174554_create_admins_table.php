@@ -17,8 +17,8 @@ class CreateAdminsTable extends Migration
         Schema::create('z_admins', function(Blueprint $table)
         {
             $table->increments('id')->comment('ID');
-            $table->string('user_name')->unique('users_username_unique')->comment('用户名');
-            $table->string('email')->unique('users_email_unique')->comment('邮件');
+            $table->string('user_name')->unique('admins_username_unique')->comment('管理员名');
+            $table->string('email')->unique('admins_email_unique')->comment('邮件');
             $table->string('mobile', 11)->nullable()->comment('手机号码');
             $table->smallInteger('sex')->default(1)->comment('性别');
             $table->string('password', 60)->comment('密码');

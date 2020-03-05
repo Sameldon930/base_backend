@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Facades\Config;
 
-trait AdminMenuTrait
+trait MenuTrait
 {
     /**
      * 与角色的多对多关系

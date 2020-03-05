@@ -2,7 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminPermissionMenuTableSeeder extends Seeder
+/**
+ * 权限角色表填充
+ * Class AdminPermissionRoleTableSeeder
+ */
+class ZPermissionRoleTableSeeder extends Seeder
 {
 
     /**
@@ -12,53 +16,55 @@ class AdminPermissionMenuTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('z_permission_menu')->delete();
-        \DB::table('z_permission_menu')->insert(array(
+        \DB::table('z_permission_role')->delete();
+        \DB::table('z_permission_role')->insert(array(
             0 =>
                 array(
                     'permission_id' => 1,
-                    'menu_id' => 2,
+                    'role_id' => 1,
                 ),
             1 =>
                 array(
                     'permission_id' => 2,
-                    'menu_id' => 2,
+                    'role_id' => 1,
                 ),
             2 =>
                 array(
                     'permission_id' => 3,
-                    'menu_id' => 3,
+                    'role_id' => 1,
                 ),
             3 =>
                 array(
                     'permission_id' => 4,
-                    'menu_id' => 3,
+                    'role_id' => 1,
                 ),
             4 =>
                 array(
                     'permission_id' => 5,
-                    'menu_id' => 4,
+                    'role_id' => 1,
                 ),
             5 =>
                 array(
                     'permission_id' => 6,
-                    'menu_id' => 4,
+                    'role_id' => 1,
                 ),
             6 =>
                 array(
                     'permission_id' => 7,
-                    'menu_id' => 5,
+                    'role_id' => 1,
                 ),
             7 =>
                 array(
                     'permission_id' => 8,
-                    'menu_id' => 5,
+                    'role_id' => 1,
                 ),
             8 =>
                 array(
                     'permission_id' => 9,
-                    'menu_id' => 7,
+                    'role_id' => 1,
                 )
         ));
+
+
     }
 }
