@@ -115,6 +115,7 @@ trait MenuTrait
         $branch = [];
         //如果参数空
         if (empty($elements)) {
+            //按照order做顺序排序
             $elements = static::with('roles', 'perms')->orderByRaw('`order` = 0,`order`')->get()->toArray();
         }
         foreach ($elements as $element) {

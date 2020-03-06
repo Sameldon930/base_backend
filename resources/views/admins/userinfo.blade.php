@@ -22,7 +22,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="{{$userinfo['username']}}">
+                        <input type="text" name="user_name" disabled autocomplete="off" class="layui-input layui-disabled" value="{{$userinfo['user_name']}}">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -34,7 +34,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">手机号：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="usertel" required  lay-verify="required|phone" placeholder="请输入标题" autocomplete="off" class="layui-input" value="{{$userinfo['mobile']}}">
+                        <input type="text" name="usertel"   disabled  autocomplete="off" class="layui-input layui-disabled" value="{{$userinfo['mobile']}}">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -65,7 +65,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="{{$userinfo['username']}}">
+                        <input type="text" name="user_name" disabled autocomplete="off" class="layui-input layui-disabled" value="{{$userinfo['user_name']}}">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -130,7 +130,7 @@
                 type:'post',
                 dataType:'json',
                 success:function(res){
-                    if(res.status == 1){
+                    if(res.status == 0){
                         layer.msg(res.msg,{icon:6});
                         var index = parent.layer.getFrameIndex(window.name);
                         setTimeout('parent.layer.close('+index+')',2000);
@@ -151,7 +151,7 @@
                 type:'post',
                 dataType:'json',
                 success:function(res){
-                    if(res.status == 1){
+                    if(res.status == 0){
                         layer.msg(res.msg,{icon:6});
                         var index = parent.layer.getFrameIndex(window.name);
                         setTimeout('parent.layer.close('+index+')',2000);

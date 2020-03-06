@@ -107,9 +107,11 @@ class DataService
                     case 'update_pwd':
                         $userinfo = new Admin();
                         $userinfo = $userinfo->user();
+                        //如果旧的密码无法和当前相同 返回错误
                         if (!App::make('hash')->check($inputs['oldpwd'], $userinfo['password'])) {
                             return ['status' => ReturnCode::FAIL, 'msg' => trans('zzs.admins.pwd_false')];
                         }
+                        //将提交的密码进行加密
                         $model->password = bcrypt($inputs['pwd']);
                         $model->exists = true;
                         $model->id = $inputs['id'];
@@ -124,7 +126,6 @@ class DataService
                         break;
                     case 'update_info':
                         $model->email = $inputs['useremail'];
-                        $model->mobile = $inputs['usertel'];
                         $model->sex = $inputs['usersex'];
                         $model->exists = true;
                         $model->id = $inputs['id'];

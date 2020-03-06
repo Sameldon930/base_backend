@@ -39,7 +39,6 @@ class StoreRequest extends FormRequest
                 }
                 $rules['tel']  = 'required|numeric';
                 $rules['sex']  = 'required|numeric';
-
                 $rules['user_role']  = 'required|numeric';
                 break;
             case '/roles'://角色管理相关操作
@@ -70,7 +69,6 @@ class StoreRequest extends FormRequest
                 break;
             case '/saveinfo/1':
                 $rules['useremail']  = 'required|email|unique:z_admins,email,'.request()->input('id');
-                $rules['usertel']  = 'required|numeric';
                 $rules['usersex']  = 'required|numeric';
                 break;
             case '/saveinfo/2':
