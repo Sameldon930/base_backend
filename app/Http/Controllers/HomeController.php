@@ -60,7 +60,7 @@ class HomeController extends BaseController
     {
         $data = $request->all();
         if (is_numeric($data['id'])) {
-            $res = DB::table('admin_' . $data['name'])->where('id', $data['id'])->update(['order' => $data['val']]);
+            $res = DB::table('z_' . $data['name'])->where('id', $data['id'])->update(['order' => $data['val']]);
             if ($res) {
                 return $this->resultJson('zzs.common.success', ReturnCode::SUCCESS);
             } else {
